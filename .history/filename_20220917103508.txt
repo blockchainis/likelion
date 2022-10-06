@@ -1,0 +1,32 @@
+public Folder : 사용자가 한번에 받아서 컨텐츠가 변하지 않는 아이들
+src :컨텐츠가 다이나믹하게 변하는 코드들
+-이 차이는 웹팩에서 중요
+- webpack에서는 우리가 빌드를 할때마다 자바스크립트에 고유한 버전이 할당이 되는데, 사용자가 이미 우리의 웹어플리케이션을 다운받았으면, 변경받앗으면 ㅇ그런아이들은 캐시가 되어있어 우리가 다운받지 않아도 된다.
+
+**public
+//index.html
+apple touch icon : progressive web app 에 사용
+mannifest : 모바일이나 데스크탑에서 앱을만들때 필요
+no script: 사용자가 브라우저에서 자바스크립트를 활성화하지 않으면 보이는 메세지. 리액트는 자바스크립트만으로 동적으로 만들어져서, 자바스크립트 쓰지 않으면 돌아가지 않는다.
+
+//robot.txt 웹 크롤러가씀
+//logo
+//favicon
+
+**src
+//service worker.js : 백그라운드에서 프로세스를 쓸 때 많이씀. 어플라인 제공할때 많이 이용 pwa에서 많이 이용됨
+//setuptest : 당장은 안다룸
+//delete logo
+//delete app.test.js
+
+//App
+import logo 지움
+//index.js
+서비스 워커import 지우고 아래 주석 밑 관련내용지움
+-react-dom : 바벨을 이용해 순수 자바스크립트로 변환 -> html로 연결
+index.html에 있는 <div id ="root">하게해주는 
+-<React.StrictMode> : 엄격한 모드로 코딩. 코딩하다가 실수하면 바로 에러메시지 표기. 개발할때 도움됨. 배포할땐 활성화 되지않기때문에 안심하고 사용해도 됨.
+
+++ source 안에 component폴더 만들어서 사용할것임
+++ 파일이름은 소문자로 엘리는 통일하겠다. ->import하는거도 소문자로
+++ 순수 js파일과 구분하기 위해서 js들을 jsx 로 바꿈 
