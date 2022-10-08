@@ -1,5 +1,5 @@
 
-
+import './app.css';
 import Login from './components/login/login';
 import styles from './app.module.css'
 
