@@ -1,0 +1,59 @@
+@value makerPrimary, makerWhite, makerBlack, makerSecondary from '../../common/colors.css';
+
+.header {
+    width: 100%;
+    display: flex;
+    border-radius: 5em;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5em;
+}
+.logoTitle {
+    display: flex;
+}
+
+
+.logo {
+    width: 3em;
+}
+
+.title{
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px rgb(228, 77, 255),
+      0 0 82px rgb(228, 77, 255),
+      0 0 92px rgb(228, 77, 255),
+      0 0 102px rgb(228, 77, 255),
+      0 0 151px rgb(228, 77, 255);
+}
+
+.logout {
+    position: absolute;
+    right: 3em;
+    top: 1em;
+    padding: 0.8em;
+    border-radius: 20%;
+    background-color: makerBlack;
+    color: markerWhite;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+
+}
+
+.button {
+        width: 6em;
+        height: 2.5em;
+        font-size: 1rem;
+        border-radius: 1.2rem;
+        background-color: makerPrimary;
+        color: makerSecondary;
+        cursor: pointer;
+        border: none;
+        outline: 0;
+        margin: 0.3em;
+        box-shadow: 0 0 10px 1px makerSecondary;
+}
