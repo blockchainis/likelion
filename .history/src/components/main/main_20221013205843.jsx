@@ -24,11 +24,10 @@ const Main = ({authService}) => {
         <section className={styles.all}>
             <Header authService={authService} onLogin={onLogin} goToConnected={goToConnected}/>
             <section className={styles.contents}>
-                지갑연결 안내-안전한지갑연결 <br />
-                게임에 대한 소개페이지<br />
-                팀소개<br />
-                
-
+                게임에 대한 소개페이지 
+                <Link to="/shop"><button>
+              Go to Page 2 
+            </button></Link>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequuntur, veritatis ad reiciendis ducimus officiis eligendi. Magnam soluta unde dicta, fuga iusto fugiat dolore maxime sunt id nisi, non culpa.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorum eaque porro ratione nihil at repudiandae deleniti ducimus temporibus unde quasi praesentium, excepturi dolores recusandae labore eum numquam quae fugit?
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores nihil enim eius unde saepe earum, dicta ex, nesciunt amet debitis, animi sunt ab itaque. Dicta consectetur quod eos officia odit!

@@ -24,8 +24,7 @@ return (
     <section className={styles.all}>
         <Header authService={authService} onLogout={onLogout} />
         <section className={styles.contents}>
-            게임에 대한 소개페이지- 로그인후에도 있음<br />
-            팀소개- 로그인후에도 있음<br />
+            로그인이되엇엉
         </section>
         <Footer/>
     </section>
