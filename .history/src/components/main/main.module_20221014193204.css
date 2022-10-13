@@ -19,6 +19,12 @@
     padding: 1rem;
     color: makerSecondary;
 }
+.contents::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+
 
 @media screen and (max-width: mediaQuery) {
     .contents{

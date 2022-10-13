@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './header.module.css'
 import { useState, useEffect } from 'react';
 
-
 const Header = ({authService, onLogin, goToConnected,onLogout}) => {
     const [userex, setuserex] = useState(false);
     useEffect(()=> {
@@ -20,8 +19,8 @@ const Header = ({authService, onLogin, goToConnected,onLogout}) => {
                     <h1 className={styles.title}>PHONY</h1>
                 </div>
                 <div className={styles.buttons}>
-                    {userex && (<a href="/shop"><button className={styles.button} >shop</button></a>)}
-                    {userex && (<a href="/mypage"><button className={styles.button}>my page</button></a>)}
+                    {userex && (<button className={styles.button} onclick="window.location.href='https://w3docs.com'"}>shop</button>)}
+                    {userex && (<button className={styles.button}>my page</button>)}
                     {userex || (<button className={styles.button} onClick={onLogin}>login</button>)}
                     {userex && (<button className={styles.logoutButton} onClick={onLogout}>● connected</button>)}
         

@@ -10,7 +10,7 @@
 
 
 .contents {
-    overflow:-moz-hidden-unscrollable;
+    overflow:scroll;
     overflow-x: hidden;
     background-color: makerPrimary;
     border-radius: 2em;

@@ -21,7 +21,7 @@ const Header = ({authService, onLogin, goToConnected,onLogout}) => {
                 </div>
                 <div className={styles.buttons}>
                     {userex && (<a href="/shop"><button className={styles.button} >shop</button></a>)}
-                    {userex && (<a href="/mypage"><button className={styles.button}>my page</button></a>)}
+                    {userex && (<button className={styles.button}>my page</button>)}
                     {userex || (<button className={styles.button} onClick={onLogin}>login</button>)}
                     {userex && (<button className={styles.logoutButton} onClick={onLogout}>● connected</button>)}
         

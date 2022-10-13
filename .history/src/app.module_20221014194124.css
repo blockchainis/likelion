@@ -32,8 +32,8 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: makerBackground;
-
+  background-color: rgb(0, 0, 0);
+  border: 1px white;
 }
 ::-webkit-scrollbar-button {
   background-color: rgb(0, 0, 0);

@@ -32,27 +32,27 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: makerBackground;
-
+  background-color: rgb(255, 255, 255);
+  box-shadow: inset;
 }
 ::-webkit-scrollbar-button {
-  background-color: rgb(0, 0, 0);
+  background-color: darkblue;
   width: 20px;
   height: 10px;
 }
 ::-webkit-scrollbar-button:start {
-  background-color: rgb(0, 0, 0); /* Top, Left 방향의 이동버튼 */
+  background-color: red; /* Top, Left 방향의 이동버튼 */
 }
 ::-webkit-scrollbar-button:end {
-  background-color: rgb(0, 0, 0); /* Bottom, Right 방향의 이동버튼 */
+  background-color: orange; /* Bottom, Right 방향의 이동버튼 */
 }
 ::-webkit-scrollbar-button:vertical:increment {
 }
 ::-webkit-scrollbar-button:vertical:decrement {
 }
 ::-webkit-scrollbar-corner {
-  background-color: transparent; /* 우측 하단의 코너 부분 */
+  background-color: violet; /* 우측 하단의 코너 부분 */
 }
 ::-webkit-resizer {
-  background-color: rgb(0, 0, 0);
+  background-color: green;
 }

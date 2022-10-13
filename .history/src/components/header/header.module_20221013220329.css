@@ -86,11 +86,11 @@ button:hover {
         0 0 4px #fff,
         0 0 11px #fff,
         0 0 19px #fff,
-        0 0 40px rgb(228, 77, 255),
-        0 0 80px rgb(228, 77, 255),
-        0 0 90px rgb(228, 77, 255),
-        0 0 100px rgb(228, 77, 255),
-        0 0 150px rgb(228, 77, 255);
+        0 0 40px makerPrimary,
+        0 0 80px makerPrimary,
+        0 0 90px makerPrimary,
+        0 0 100px makerPrimary,
+        0 0 150px makerPrimary;
     }
     20%, 24%, 55% {       
       text-shadow: none;

@@ -20,6 +20,23 @@
     color: makerSecondary;
 }
 
+
+.contents ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+ 
+.contents ::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+ 
+.contents ::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 5px;
+}
+
+
 @media screen and (max-width: mediaQuery) {
     .contents{
         overflow:initial;
