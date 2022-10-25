@@ -1,0 +1,11 @@
+@value makerSecondary from '../../common/colors.css';
+
+.footer {
+    width: 100%;
+    max-width: 50rem;
+    text-align: center;
+}
+
+.title {
+    color: makerSecondary;
+}
