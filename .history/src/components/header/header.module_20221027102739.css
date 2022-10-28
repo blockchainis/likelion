@@ -1,0 +1,142 @@
+@value makerPrimary, makerSecondary, makerBackground from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+
+.header {
+    width: 50rem;
+    display: flex;
+    padding: 0rem;
+    max-width: mediaQuery;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5em;
+
+    padding: 0px;
+}
+.logoTitle {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.logo {
+    width: 100px;
+
+
+}
+
+.title{
+    animation: flicker 1.5s infinite alternate;
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px rgb(228, 77, 255),
+      0 0 82px rgb(228, 77, 255),
+      0 0 92px rgb(228, 77, 255),
+      0 0 102px rgb(228, 77, 255),
+      0 0 151px rgb(228, 77, 255);
+}
+
+.logout {
+    position: absolute;
+    right: 3em;
+    top: 1em;
+    padding: 0.8em;
+    border-radius: 20%;
+    background-color: makerBlack;
+    color: markerWhite;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+
+}
+
+.button {
+        width: 6em;
+        height: 2.5em;
+        font-size: 1rem;
+        border-radius: 1.2rem;
+        background-color: makerPrimary;
+        color: makerSecondary;
+        cursor: pointer;
+        border: none;
+        outline: 0;
+        margin: 0.3em;
+        box-shadow: 0 0 15px 3px makerSecondary;
+}
+.active {
+    width: 6em;
+    height: 2.5em;
+    font-size: 1rem;
+    border-radius: 1.2rem;
+    background-color: makerPrimary;
+    color: makerSecondary;
+    cursor: pointer;
+    border: none;
+    outline: 0;
+    margin: 0.3em;
+    box-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 12px makerSecondary,
+      0 0 20px makerPrimary,
+      0 0 40px makerSecondary;
+
+}
+
+
+
+.logoutButton {
+    height: 2.5em;
+    font-size: 1rem;
+    border-radius: 1.2rem;
+    background-color: makerSecondary;
+    color: makerPrimary;
+    cursor: pointer;
+    border: none;
+    outline: 0;
+    margin: 0.3em;
+    box-shadow: 0 0 15px 3px makerSecondary;
+}
+button:hover {
+    opacity: 0.8;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow:
+        0 0 4px #fff,
+        0 0 11px #fff,
+        0 0 19px #fff,
+        0 0 40px rgb(228, 77, 255),
+        0 0 80px rgb(228, 77, 255),
+        0 0 90px rgb(228, 77, 255),
+        0 0 100px rgb(228, 77, 255),
+        0 0 150px rgb(228, 77, 255);
+    }
+    20%, 24%, 55% {       
+      text-shadow: none;
+    }
+  }
+
+@media screen and (max-width: mediaQuery) {
+    .header {
+        width: fit-content;
+    }
+    .buttons{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        transition: 3ms;
+        
+    }
+
+    .logoTitle {
+        position: relative;
+        top: 0px;
+        left: -120px;
+        
+    }
+    
+}

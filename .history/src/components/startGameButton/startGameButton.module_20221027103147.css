@@ -1,0 +1,11 @@
+.startGame {
+    overflow:-moz-hidden-unscrollable;
+    overflow-x: hidden;
+    background-color: makerPrimary;
+    border-radius: 2em;
+    box-shadow: 0 0 15px 3px makerSecondary;
+    height: 30rem;
+    padding: 1rem;
+    max-width: mediaQuery;
+    color: makerSecondary;
+}

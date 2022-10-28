@@ -1,0 +1,13 @@
+@value makerPrimary, makerSecondary, makerBackground from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+.startGame {
+    overflow:-moz-hidden-unscrollable;
+    overflow-x: hidden;
+    background-color: makerPrimary;
+    border-radius: 2em;
+    box-shadow: 0 0 15px 1px makerSecondary;
+    padding: 1rem;
+    margin: 1rem;
+    max-width: mediaQuery;
+    color: makerSecondary;
+}

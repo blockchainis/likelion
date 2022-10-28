@@ -1,0 +1,8 @@
+#team {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.memberImg {
+    width: 25%;
+}

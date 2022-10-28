@@ -1,0 +1,13 @@
+@value makerPrimary, makerSecondary, makerBackground from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+.startGame {
+    text-align: center;
+    background-color: makerPrimary;
+    border-radius: 1em;
+    box-shadow: 0 0 10px 1px makerSecondary;
+    padding: 0.5rem;
+    margin: 1rem;
+    width: mediaQuery;
+    color: makerSecondary;
+    font-size: 2rem;
+}

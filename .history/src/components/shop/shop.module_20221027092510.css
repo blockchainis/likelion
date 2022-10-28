@@ -1,0 +1,72 @@
+@value makerPrimary, makerSecondary from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+
+
+/* 공통 */
+.contents {
+    overflow:-moz-hidden-unscrollable;
+    overflow-x: hidden;
+    background-color: makerPrimary;
+    border-radius: 2em;
+    box-shadow: 0 0 15px 3px makerSecondary;
+    min-width: mediaQuery;
+    height: 30rem;
+    padding: 1rem;
+    max-width: mediaQuery;
+    color: makerSecondary;
+}
+
+.mobileContents{
+ display: none;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ font-size: 1.5em;
+}
+.mobileContents> img {
+    width: 80%;
+}
+
+@media screen and (max-width: mediaQuery) {
+    .all{
+        height: 100vh;
+    }
+    .contents{
+        overflow:initial;
+        height: auto;
+        display: none;
+    }
+    .mobileContents{
+        display: flex;
+        background-color: makerPrimary;
+        border-radius: 2em;
+        box-shadow: 0 0 15px 3px makerSecondary;
+        height: 30rem;
+        padding: 1rem;
+        max-width: mediaQuery;
+        color: makerSecondary;
+        overflow:initial;
+        height: auto;
+    }
+   }
+/* 공통끝 */
+#shop {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.myStatus {
+    border-radius: 1rem;
+    width: 27%;
+    height: 100vh;
+    margin-right: 1rem;
+    background-color: white;
+}
+
+.buyItems {
+    border-radius: 1rem;
+    width: 70%;
+    background-color: white;
+}

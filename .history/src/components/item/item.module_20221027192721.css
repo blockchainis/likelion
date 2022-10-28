@@ -1,0 +1,22 @@
+.item {
+    margin: 10px;
+    border-radius: 1rem;
+    width: 100px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.itemImg {
+    height: 120px;
+    width: 120px;
+    border-radius: 0.5rem;
+}
+.mint {
+    color: white;
+    font-size: small;
+    text-align: center;
+}
