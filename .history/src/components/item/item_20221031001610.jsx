@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './item.module.css'
 
-export default function Item({item, handleUpdate ,handleBuy}) {
+export default function Item({item, handleUpdate}) {
   const {id, src, collection, status} = item;
   const active = () => {
     handleUpdate({id, src, collection, status: 'active'})
   }
   const buyItem = () => {
-    handleBuy(item)
+    console.log({id, src,collection});
   }
   return (
 <div className={styles.item} data-type="active">

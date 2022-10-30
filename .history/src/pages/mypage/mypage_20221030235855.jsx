@@ -9,9 +9,7 @@ import ActiveItem from '../../components/activeItem/activeItem';
 import { useState } from 'react';
 
 
-const MyPage = (props) =>{
-  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
-
+const MyPage = ({authService, initItems, scoreLimit,nickname,editNickname,myStatus,setMystatus}) =>{
     const mypage = true;
     const [maxScore, minScore]= scoreLimit;
     //login용 기본 함수
@@ -39,6 +37,10 @@ const MyPage = (props) =>{
   //maxScore, minScore => blockchain에서 불러와야 함. 조작시도 막아야 하니까 최대최소점수.
 
 
+
+  
+  const [myStatus, setMystatus] = useState({myItems:initItems, myScore: initItems.filter((i) => i.status === 'active').filter((i) => i.collection === 'liarplus').length - initItems.filter((i) => i.status === 'active').filter((i) => i.collection === 'liarminus').length
+  })
   // activeitem
   const activeItems = myStatus.myItems.filter((i) => i.status === 'active');
   const filters = ['all','active','deactive'];
@@ -63,9 +65,7 @@ const MyPage = (props) =>{
     setMystatus({myItems:myStatus.myItems, myScore:myStatus.myItems.filter((i) => i.collection === 'liarplus'&& i.status === 'active').length-myStatus.myItems.filter((i) => i.collection === 'liarminus'&& i.status === 'active').length});
   }
   useEffect(() => {
-    updateScore();
-    updateScoreLimit(); 
-    console.log(scoreLimit);
+    updateScore(); 
   },[myStatus.myItems])
 
 return (

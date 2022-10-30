@@ -8,7 +8,7 @@ import Item from '../../components/item/item';
 
 
 const Shop = (props) =>{
-    const {authService, shopItems,setShopItems, scoreLimit,nickname,myStatus,setMystatus, updateScoreLimit} = props
+    const {authService, initItems, scoreLimit,nickname,editNickname,myStatus,setMystatus} = props
     const shop = true;
     const [maxScore, minScore]= scoreLimit;
     //login용 기본 함수
@@ -23,22 +23,31 @@ const Shop = (props) =>{
         alert('스코어 조작시도가 발견되었습니다. 관리자에게 문의해주세요.')
         onLogout()
         }
-    });
+    },);
     const onLogout = () => {
         authService.logout();
   };
   //shop item
+  const initShopItems = [
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
+    {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
 
-
+  ]
+  const [shopItems, setShopItems] =useState(initShopItems);
   const handleUpdate = (updated) =>{setShopItems(shopItems.map((t) => (t.id === updated.id ? updated : t)));}
   const handleBuy = (item) =>{
-    setShopItems(shopItems.map((i) => (i.id === item.id ? {...item, remain: item.remain -1} : i)));
-    setMystatus({myItems:[...myStatus.myItems,{id:crypto.randomUUID(), src:item.src, collection:item.collection, status: 'deactive'}], myScore: myStatus.myScore});
-    updateScoreLimit();
-    }
-    useEffect(() => {
-        updateScoreLimit(); 
-      },[myStatus.myItems])
+    setShopItems(pre => shopItems.map((i) => (i.id === item.id ? {...i, remain: pre.i.remain -1} : i)));
+    console.log(item)}
   
 
 return (

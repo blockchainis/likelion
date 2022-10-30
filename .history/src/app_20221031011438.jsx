@@ -23,7 +23,6 @@ function App({authService}) {
     {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
 
   ];
-  //같은거 구매시 같은 uuid => 일단 구매 시, 다른 랜덤 uuid부여. nft에서는 id가 토큰넘버+collection으로 들어가니 문제 없을것.
   const initShopItems = [
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
@@ -38,7 +37,7 @@ function App({authService}) {
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
 
-  ];
+  ]
   const initscoreLimit = [initItems.filter((i) => i.collection === 'liarplus').length, initItems.filter((i) => i.collection === 'liarplus').length];
   const [scoreLimit,setScoreLimit] = useState(initscoreLimit);
   const updateScoreLimit = () =>{

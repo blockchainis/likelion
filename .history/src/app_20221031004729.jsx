@@ -23,7 +23,6 @@ function App({authService}) {
     {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
 
   ];
-  //같은거 구매시 같은 uuid => 일단 구매 시, 다른 랜덤 uuid부여. nft에서는 id가 토큰넘버+collection으로 들어가니 문제 없을것.
   const initShopItems = [
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
@@ -38,13 +37,8 @@ function App({authService}) {
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
     {id : crypto.randomUUID(), src : './images/logo.png', collection:'liarplus', remain : 1000 },
 
-  ];
-  const initscoreLimit = [initItems.filter((i) => i.collection === 'liarplus').length, initItems.filter((i) => i.collection === 'liarplus').length];
-  const [scoreLimit,setScoreLimit] = useState(initscoreLimit);
-  const updateScoreLimit = () =>{
-    setScoreLimit([myStatus.myItems.filter((i) => i.collection === 'liarplus').length, myStatus.myItems.filter((i) => i.collection === 'liarplus').length])
-
-  }
+  ]
+  const scoreLimit = [initItems.filter((i) => i.collection === 'liarplus').length, initItems.filter((i) => i.collection === 'liarplus').length];
   const [nickname, setNickname] = useState('nickname')
   function editNickname()  {
     const newName = prompt("새로운 닉네임을 입력해주세요", nickname);
@@ -60,8 +54,8 @@ function App({authService}) {
         <Routes>
           <Route exact path="/" element={<Main authService={authService}/>} />
           <Route path="/connected" element={<Connected authService={authService} />} />
-          <Route path="/shop" element={<Shop authService={authService} nickname={nickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} initShopItems={initShopItems} shopItems={shopItems} setShopItems={setShopItems} updateScoreLimit={updateScoreLimit}/>}/>
-          <Route path="/mypage" element={<MyPage authService={authService} initItems={initItems} nickname={nickname} editNickname={editNickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} updateScoreLimit={updateScoreLimit}/>}/>
+          <Route path="/shop" element={<Shop authService={authService} nickname={nickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} initShopItems={initShopItems} shopItems={shopItems} setShopItems={setShopItems}/>}/>
+          <Route path="/mypage" element={<MyPage authService={authService} initItems={initItems} nickname={nickname} editNickname={editNickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus}/>}/>
         </Routes>
     </BrowserRouter> 
   </div>)

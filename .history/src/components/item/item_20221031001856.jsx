@@ -7,7 +7,7 @@ export default function Item({item, handleUpdate ,handleBuy}) {
     handleUpdate({id, src, collection, status: 'active'})
   }
   const buyItem = () => {
-    handleBuy(item)
+    handleBuy()
   }
   return (
 <div className={styles.item} data-type="active">

@@ -10,10 +10,10 @@ import { useState } from 'react';
 
 
 const MyPage = (props) =>{
-  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
+  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,scoreLimit} = props
 
     const mypage = true;
-    const [maxScore, minScore]= scoreLimit;
+    const [maxScore, minScore]= scoreLimit
     //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
@@ -63,8 +63,7 @@ const MyPage = (props) =>{
     setMystatus({myItems:myStatus.myItems, myScore:myStatus.myItems.filter((i) => i.collection === 'liarplus'&& i.status === 'active').length-myStatus.myItems.filter((i) => i.collection === 'liarminus'&& i.status === 'active').length});
   }
   useEffect(() => {
-    updateScore();
-    updateScoreLimit(); 
+    updateScore(); 
     console.log(scoreLimit);
   },[myStatus.myItems])
 

@@ -35,9 +35,11 @@ const Shop = (props) =>{
     setShopItems(shopItems.map((i) => (i.id === item.id ? {...item, remain: item.remain -1} : i)));
     setMystatus({myItems:[...myStatus.myItems,{id:crypto.randomUUID(), src:item.src, collection:item.collection, status: 'deactive'}], myScore: myStatus.myScore});
     updateScoreLimit();
+    console.log(scoreLimit);
     }
     useEffect(() => {
         updateScoreLimit(); 
+        console.log(scoreLimit);
       },[myStatus.myItems])
   
 

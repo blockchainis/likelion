@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 const MyPage = (props) =>{
-  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
+  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus} = props
 
     const mypage = true;
     const [maxScore, minScore]= scoreLimit;
@@ -63,9 +63,7 @@ const MyPage = (props) =>{
     setMystatus({myItems:myStatus.myItems, myScore:myStatus.myItems.filter((i) => i.collection === 'liarplus'&& i.status === 'active').length-myStatus.myItems.filter((i) => i.collection === 'liarminus'&& i.status === 'active').length});
   }
   useEffect(() => {
-    updateScore();
-    updateScoreLimit(); 
-    console.log(scoreLimit);
+    updateScore(); 
   },[myStatus.myItems])
 
 return (

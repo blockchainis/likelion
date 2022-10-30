@@ -9,11 +9,8 @@ import ActiveItem from '../../components/activeItem/activeItem';
 import { useState } from 'react';
 
 
-const MyPage = (props) =>{
-  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
-
+const MyPage = ({authService}) =>{
     const mypage = true;
-    const [maxScore, minScore]= scoreLimit;
     //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
@@ -21,52 +18,55 @@ const MyPage = (props) =>{
         .onAuthChange(user => {
             user || history('/');
         });
-          // 점수 조작 시도시 강제 로그아웃. 
-      if (minScore<myStatus.myScore || maxScore<myStatus.myScore) {
-        alert('스코어 조작시도가 발견되었습니다. 관리자에게 문의해주세요.')
-        onLogout()
-}
-    },);
+    });
     const onLogout = () => {
         authService.logout();
   };
-    // 닉네임바꾸기
-
   // 가지고 있는 items 
   // 내가 불러온 블록체인에서 리스트
   //{id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus'.....}
   //=> {+status}
   //maxScore, minScore => blockchain에서 불러와야 함. 조작시도 막아야 하니까 최대최소점수.
+  const initItems = [
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'active' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
 
-
-  // activeitem
-  const activeItems = myStatus.myItems.filter((i) => i.status === 'active');
+  ]
+  const [myItems, setMyItems] =useState(initItems)
+  //아이템 필터
   const filters = ['all','active','deactive'];
   const [filter, setFilter] = useState(filters[0]);
-  function getFilteredItem(myStatus, filter) {
+  function getFilteredItem(myItems, filter) {
     if (filter === 'all') {
-      return myStatus.myItems;
+      return myItems;
     }
-    return myStatus.myItems.filter((i) => i.status === filter); 
+    return myItems.filter((i) => i.status === filter); 
 }
-  const filtered = getFilteredItem(myStatus, filter);
+  const filtered = getFilteredItem(myItems, filter);
+  // activeitem
+  const activeItems = myItems.filter((i) => i.status === 'active');
+  // 아이템 점수계산
+  const liarScore = activeItems.filter((i) => i.collection === 'liarplus').length - activeItems.filter((i) => i.collection === 'liarminus').length;
+  console.log(liarScore);
 
-
-
-
+  // 닉네임바꾸기
+  const [nickname, setNickname] = useState('nickname')
+  function editNickname()  {
+    const newName = prompt("새로운 닉네임을 입력해주세요", nickname);
+    setNickname(newName);
+  }
   //updatestatus- active item <=> deactive item
-  // handle Active가 한발작 늦게 처리되는 문제. 꼭 같이 묶어줘야하나
-  const handleUpdate = (updated) =>{
-    setMystatus({ myItems : myStatus.myItems.map((t) => (t.id === updated.id ? updated : t)), myScore: myStatus.myItems.filter((i) => i.collection === 'liarplus'&& i.status === 'active').length-myStatus.myItems.filter((i) => i.collection === 'liarminus'&& i.status === 'active').length} );
-  }
-  const updateScore =() =>{
-    setMystatus({myItems:myStatus.myItems, myScore:myStatus.myItems.filter((i) => i.collection === 'liarplus'&& i.status === 'active').length-myStatus.myItems.filter((i) => i.collection === 'liarminus'&& i.status === 'active').length});
-  }
-  useEffect(() => {
-    updateScore();
-    updateScoreLimit(); 
-    console.log(scoreLimit);
-  },[myStatus.myItems])
+  const handleUpdate = (updated) =>
+  setMyItems(myItems.map((t) => (t.id === updated.id ? updated : t)));
+
 
 return (
     <section className="all">
@@ -83,7 +83,7 @@ return (
                 
                 <div className={styles.status}>
                     <div className={styles.wallet}>
-                        <div className={styles.address}>liar Score : {myStatus.myScore}</div>
+                        <div className={styles.address}>지갑주소 : 0xF5c1DedC9E25473820b676087EFfd4Fe859C8311</div>
                         <div className={styles.ownedCoin}>23342coin</div>
                     </div>
                         <div className={styles.activeItems}>
@@ -121,20 +121,15 @@ export default MyPage;
 // 프로필 네임 설정 코인으로 구매가능 <br />
 
 
-{/* ❕개발 시 문의 및 주의사항
-
-❓로그인한 지갑의 , 해 사이트에서 발급한 nft만 데이터베이스로 불러올 수 있나?
+{/* <h2>❕개발 시 문의 및 주의사항</h2> 
+1)로그인한 지갑의 , 해 사이트에서 발급한 nft만 데이터베이스로 불러올 수 있나?
 => 컬렉션으로 소팅(발급한 nft가 세가지라면 세개 다 내 지갑에서 볼 수 있고, 그 종류가 데이터 베이스에 들어이써야함)
-
- ❕아아템 목록 = [] =>불러온 데이터 베이스(해 사이트에서 발급한 nft) + 사이트 서버에 저장된 active및 deactive상태 
+아아템 목록 = [] =>불러온 데이터 베이스(해 사이트에서 발급한 nft) + 사이트 서버에 저장된 active및 deactive상태 
 ex) [id: token-id, src=img , collection=(어떤아이템인지,컬렉션이름),status: active/deactive]
      id, src,collection from blockchain, status from server data.
- 불러온 데이터 베이스의 상태는 우리 서버에 저장(코인 소모 안하게 하기 위해)
-
-❕active 상태가 된 아이템은 나의 능력치를 변화시킴
-❓maxScore, minScore픽스: 내가가지고 있는 nft보다 더 많은스코어로 조작시도 시 막을 수 있는 방법
- ❓닉네임변경건 사용: edit시 코인 소모 후 서버에 기록. (현재 개발된 상황과 가까움.)or 아이템 구매 후 사용하기 => 어느것이 더욱 직관적이고 쉬울지 
-*/}
+ - 불러온 데이터 베이스의 상태는 우리 서버에 저장(코인 소모 안하게 하기 위해)
+active 상태가 된 아이템은 나의 능력치를 변화시킴
+2) 닉네임변경건 사용: edit시 코인 소모 후 서버에 기록. (현재 개발된 상황과 가까움.)or 아이템 구매 후 사용하기 => 어느것이 더욱 직관적이고 쉬울지 */}
 
 
         

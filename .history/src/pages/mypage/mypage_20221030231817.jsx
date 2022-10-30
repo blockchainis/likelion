@@ -9,11 +9,8 @@ import ActiveItem from '../../components/activeItem/activeItem';
 import { useState } from 'react';
 
 
-const MyPage = (props) =>{
-  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
-
+const MyPage = ({authService}) =>{
     const mypage = true;
-    const [maxScore, minScore]= scoreLimit;
     //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
@@ -21,24 +18,39 @@ const MyPage = (props) =>{
         .onAuthChange(user => {
             user || history('/');
         });
-          // 점수 조작 시도시 강제 로그아웃. 
-      if (minScore<myStatus.myScore || maxScore<myStatus.myScore) {
-        alert('스코어 조작시도가 발견되었습니다. 관리자에게 문의해주세요.')
-        onLogout()
-}
-    },);
+    });
     const onLogout = () => {
         authService.logout();
   };
     // 닉네임바꾸기
-
+    const [nickname, setNickname] = useState('nickname')
+    function editNickname()  {
+      const newName = prompt("새로운 닉네임을 입력해주세요", nickname);
+      setNickname(newName);
+    }
   // 가지고 있는 items 
   // 내가 불러온 블록체인에서 리스트
   //{id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus'.....}
   //=> {+status}
   //maxScore, minScore => blockchain에서 불러와야 함. 조작시도 막아야 하니까 최대최소점수.
+  const initItems = [
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'active' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/logo.png',collection: 'liarplus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'deactive' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
+    {id : crypto.randomUUID(), src : './images/profile.png',collection: 'liarminus', status: 'active' },
 
-
+  ]
+  const maxScore = initItems.filter((i) => i.collection === 'liarplus').length;
+  const minScore = initItems.filter((i) => i.collection === 'liarplus').length;
+  
+  const [myStatus, setMystatus] = useState({myItems:initItems, myScore: initItems.filter((i) => i.status === 'active').filter((i) => i.collection === 'liarplus').length - initItems.filter((i) => i.status === 'active').filter((i) => i.collection === 'liarminus').length
+  })
   // activeitem
   const activeItems = myStatus.myItems.filter((i) => i.status === 'active');
   const filters = ['all','active','deactive'];
@@ -62,11 +74,13 @@ const MyPage = (props) =>{
   const updateScore =() =>{
     setMystatus({myItems:myStatus.myItems, myScore:myStatus.myItems.filter((i) => i.collection === 'liarplus'&& i.status === 'active').length-myStatus.myItems.filter((i) => i.collection === 'liarminus'&& i.status === 'active').length});
   }
-  useEffect(() => {
-    updateScore();
-    updateScoreLimit(); 
-    console.log(scoreLimit);
-  },[myStatus.myItems])
+useEffect(() => {updateScore(); 
+if (minScore<myStatus.myScore || maxScore<myStatus.myScore || true) {
+  throw Error();
+  console.log(error);
+
+}
+},[myStatus.myItems])
 
 return (
     <section className="all">

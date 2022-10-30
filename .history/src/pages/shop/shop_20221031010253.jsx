@@ -8,7 +8,7 @@ import Item from '../../components/item/item';
 
 
 const Shop = (props) =>{
-    const {authService, shopItems,setShopItems, scoreLimit,nickname,myStatus,setMystatus, updateScoreLimit} = props
+    const {authService, shopItems,setShopItems, scoreLimit,nickname,myStatus,setMystatus, setScoreLimit} = props
     const shop = true;
     const [maxScore, minScore]= scoreLimit;
     //login용 기본 함수
@@ -33,12 +33,10 @@ const Shop = (props) =>{
   const handleUpdate = (updated) =>{setShopItems(shopItems.map((t) => (t.id === updated.id ? updated : t)));}
   const handleBuy = (item) =>{
     setShopItems(shopItems.map((i) => (i.id === item.id ? {...item, remain: item.remain -1} : i)));
-    setMystatus({myItems:[...myStatus.myItems,{id:crypto.randomUUID(), src:item.src, collection:item.collection, status: 'deactive'}], myScore: myStatus.myScore});
-    updateScoreLimit();
+    setMystatus({myItems:[...myStatus.myItems,{id:item.id, src:item.src, collection:item.collection, status: 'deactive'}], myScore: myStatus.myScore});
+    setScoreLimit(8,8);
+    console.log(myStatus.myItems.filter((i) => i.collection === 'liarplus').length, myStatus.myItems.filter((i) => i.collection === 'liarplus').length);
     }
-    useEffect(() => {
-        updateScoreLimit(); 
-      },[myStatus.myItems])
   
 
 return (

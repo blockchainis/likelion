@@ -33,12 +33,11 @@ const Shop = (props) =>{
   const handleUpdate = (updated) =>{setShopItems(shopItems.map((t) => (t.id === updated.id ? updated : t)));}
   const handleBuy = (item) =>{
     setShopItems(shopItems.map((i) => (i.id === item.id ? {...item, remain: item.remain -1} : i)));
-    setMystatus({myItems:[...myStatus.myItems,{id:crypto.randomUUID(), src:item.src, collection:item.collection, status: 'deactive'}], myScore: myStatus.myScore});
+    setMystatus({myItems:[...myStatus.myItems,{id:item.id, src:item.src, collection:item.collection, status: 'deactive'}], myScore: myStatus.myScore});
     updateScoreLimit();
+    console.log(scoreLimit);
     }
-    useEffect(() => {
-        updateScoreLimit(); 
-      },[myStatus.myItems])
+    console.log(scoreLimit);
   
 
 return (

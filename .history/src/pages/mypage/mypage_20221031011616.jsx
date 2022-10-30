@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 const MyPage = (props) =>{
-  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
+  const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus} = props
 
     const mypage = true;
     const [maxScore, minScore]= scoreLimit;
