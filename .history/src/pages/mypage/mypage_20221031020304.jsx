@@ -22,13 +22,14 @@ const MyPage = (props) =>{
         .onAuthChange(user => {
             user || history('/');
         });
+        console.log(scoreLimit);
           // 점수 조작 시도시 강제 로그아웃. 
       if (maxScore<myStatus.myScore){
-          alert('라이어 + 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
-          onLogout()
-      } else if (Number(-minScore)>Number(myStatus.myScore)) {
-          alert('라이어 - 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
-          onLogout()
+          alert('+조작시도')
+      } else if (-1*Number(minScore)<-1*Number(myStatus.myScore)) {
+        console.log(type(-minScore));
+        alert('- 조작시도')
+        // onLogout()
       }
     },);
     const onLogout = () => {
@@ -69,6 +70,7 @@ const MyPage = (props) =>{
   useEffect(() => {
     updateScore();
     updateScoreLimit(); 
+    console.log(scoreLimit);
   },[myStatus.myItems])
 
 return (

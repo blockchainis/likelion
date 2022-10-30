@@ -42,7 +42,7 @@ function App({authService}) {
   const initscoreLimit = [initItems.filter((i) => i.collection === 'liarplus').length, initItems.filter((i) => i.collection === 'liarplus').length];
   const [scoreLimit,setScoreLimit] = useState(initscoreLimit);
   const updateScoreLimit = () =>{
-    setScoreLimit([myStatus.myItems.filter((i) => i.collection === 'liarplus').length, myStatus.myItems.filter((i) => i.collection === 'liarminus').length])
+    setScoreLimit([myStatus.myItems.filter((i) => i.collection === 'liarplus').length, myStatus.myItems.filter((i) => i.collection === 'minus').length])
 
   }
   const [nickname, setNickname] = useState('nickname')

@@ -19,12 +19,9 @@ const Shop = (props) =>{
             user || history('/');
         });
          // 점수 조작 시도시 강제 로그아웃. 
-         if (maxScore<myStatus.myScore){
-            alert('라이어 + 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
-            onLogout()
-        } else if (Number(-minScore)>Number(myStatus.myScore)) {
-            alert('라이어 - 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
-            onLogout()
+         if (maxScore<myStatus.myScore || -minScore<-myStatus.myScore>-myStatus.myScore){
+        alert('스코어 조작시도가 발견되었습니다. 관리자에게 문의해주세요.')
+        onLogout()
         }
     });
     const onLogout = () => {

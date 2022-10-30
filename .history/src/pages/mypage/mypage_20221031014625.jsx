@@ -7,14 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import Item from '../../components/item/item';
 import ActiveItem from '../../components/activeItem/activeItem';
 import { useState } from 'react';
-import { type } from '@testing-library/user-event/dist/type';
 
 
 const MyPage = (props) =>{
   const {authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit} = props
 
     const mypage = true;
-    const [maxScore, minScore]= scoreLimit;
     //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
@@ -23,13 +21,10 @@ const MyPage = (props) =>{
             user || history('/');
         });
           // 점수 조작 시도시 강제 로그아웃. 
-      if (maxScore<myStatus.myScore){
-          alert('라이어 + 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
-          onLogout()
-      } else if (Number(-minScore)>Number(myStatus.myScore)) {
-          alert('라이어 - 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
-          onLogout()
-      }
+      if (scoreLimit[1]<myStatus.myScore || scoreLimit[0]<myStatus.myScore) {
+        alert('스코어 조작시도가 발견되었습니다. 관리자에게 문의해주세요.')
+        onLogout()
+}
     },);
     const onLogout = () => {
         authService.logout();
@@ -69,6 +64,7 @@ const MyPage = (props) =>{
   useEffect(() => {
     updateScore();
     updateScoreLimit(); 
+    console.log(scoreLimit);
   },[myStatus.myItems])
 
 return (
