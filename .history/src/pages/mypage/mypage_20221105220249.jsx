@@ -7,18 +7,26 @@ import { useNavigate } from 'react-router-dom';
 import Item from '../../components/item/item';
 import ActiveItem from '../../components/activeItem/activeItem';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
 
 
-const MyPage = ({scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit}) =>{
+const MyPage = ({authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit}) =>{
     const mypage = true;
     const [maxScore, minScore]= scoreLimit;
-    const {user} = useAuth();
+    //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
-        if (!user || !localStorage.getItem('_user')){
-            history('/');
-        }
+        // authService
+        // .onAuthChange(user => {
+        //     user || history('/');
+        // });
+          // 점수 조작 시도시 강제 로그아웃. 
+      if (maxScore<myStatus.myScore){
+          alert('라이어 + 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
+          onLogout()
+      } else if (Number(-minScore)>Number(myStatus.myScore)) {
+          alert('라이어 - 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
+          onLogout()
+      }
     },);
     const onLogout = () => {
         console.log('logout');
@@ -62,7 +70,7 @@ const MyPage = ({scoreLimit,nickname,editNickname,myStatus,setMystatus,updateSco
 
 return (
     <section className="all">
-        <Header mypage={mypage}/>
+        <Header authService={authService} onLogout={onLogout} mypage={mypage}/>
         <section className={styles.mobileContents}>모바일 환경에서는 접속이 되지 않습니다. <br />데스크탑 환경에서 접속해주세요.
         <img src="./images/nomobile.png" alt="no mobile" />
         </section>

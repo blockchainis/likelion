@@ -18,6 +18,9 @@ const Connected = () =>{
         }
 
     },);
+    const onLogout = () => {
+        console.log('logout');
+  };
 return (
     <section className="all">
         <Header />

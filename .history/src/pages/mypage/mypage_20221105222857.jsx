@@ -7,10 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import Item from '../../components/item/item';
 import ActiveItem from '../../components/activeItem/activeItem';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
 
 
-const MyPage = ({scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit}) =>{
+const MyPage = ({authService, scoreLimit,nickname,editNickname,myStatus,setMystatus,updateScoreLimit}) =>{
     const mypage = true;
     const [maxScore, minScore]= scoreLimit;
     const {user} = useAuth();
@@ -62,7 +61,7 @@ const MyPage = ({scoreLimit,nickname,editNickname,myStatus,setMystatus,updateSco
 
 return (
     <section className="all">
-        <Header mypage={mypage}/>
+        <Header authService={authService} onLogout={onLogout} mypage={mypage}/>
         <section className={styles.mobileContents}>모바일 환경에서는 접속이 되지 않습니다. <br />데스크탑 환경에서 접속해주세요.
         <img src="./images/nomobile.png" alt="no mobile" />
         </section>

@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 const klaytn = window.klaytn;
 
 
-function App() {
+function App({authService}) {
 
   const {user, setUser} = useAuth();
   // 홈페이지에 접속 했을시, localStorage user id있고, 카이카스 계정과 비교. 동일할 경우 로그인 계속 유지. 액션은 다른 effect에서
@@ -135,10 +135,10 @@ function App() {
     {/* <RouterProvider route={router} />; */}
     <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Main/>} />
-          <Route path="/connected" element={<Connected/>} />
-          <Route path="/shop" element={<Shop nickname={nickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} initShopItems={initShopItems} shopItems={shopItems} setShopItems={setShopItems} updateScoreLimit={updateScoreLimit}/>}/>
-          <Route path="/mypage" element={<MyPage initItems={initItems} nickname={nickname} editNickname={editNickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} updateScoreLimit={updateScoreLimit}/>}/>
+          <Route exact path="/" element={<Main authService={authService}/>} />
+          <Route path="/connected" element={<Connected authService={authService} />} />
+          <Route path="/shop" element={<Shop authService={authService} nickname={nickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} initShopItems={initShopItems} shopItems={shopItems} setShopItems={setShopItems} updateScoreLimit={updateScoreLimit}/>}/>
+          <Route path="/mypage" element={<MyPage authService={authService} initItems={initItems} nickname={nickname} editNickname={editNickname} scoreLimit={scoreLimit} myStatus={myStatus} setMystatus={setMystatus} updateScoreLimit={updateScoreLimit}/>}/>
         </Routes>
     </BrowserRouter> 
   </div>)

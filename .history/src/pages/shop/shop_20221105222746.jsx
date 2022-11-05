@@ -8,15 +8,20 @@ import Item from '../../components/item/item';
 import { useAuth } from '../../context/AuthContext';
 
 
-const Shop = ({shopItems,setShopItems, nickname,myStatus,setMystatus, updateScoreLimit}) =>{
+const Shop = (props) =>{
+    const {authService, shopItems,setShopItems, scoreLimit,nickname,myStatus,setMystatus, updateScoreLimit} = props
     const shop = true;
 
-    const {user} = useAuth();
+    const [maxScore, minScore]= scoreLimit;
+    //login용 기본 함수
+    const {user, setUser} = useAuth();
+    //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
         if (!user || !localStorage.getItem('_user')){
             history('/');
         }
+
     },);
     const onLogout = () => {
         console.log('logout');
@@ -37,7 +42,7 @@ const Shop = ({shopItems,setShopItems, nickname,myStatus,setMystatus, updateScor
 
 return (
     <section className="all">
-        <Header shop={shop}/>
+        <Header authService={authService} onLogout={onLogout} shop={shop}/>
         <section className={styles.mobileContents}>모바일 환경에서는 접속이 되지 않습니다. <br />데스크탑 환경에서 접속해주세요.
         <img src="./images/nomobile.png" alt="no mobile" />
         </section>

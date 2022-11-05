@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './header.module.css'
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StartGameButton from '../startGameButton/startGameButton';
 import { useAuth } from '../../context/AuthContext';
@@ -7,11 +8,11 @@ import { toast } from 'react-toastify';
 
 const klaytn = window.klaytn;
 
-const Header = ({mypage, shop}) => {
+const Header = ({authService, onLogin, mypage, shop,onLogout}) => {
     const {user, setUser} = useAuth();
     async function loginWithKaikas() {
       if (!klaytn) {
-        toast.error("Kaikas를 설치해주세요!");
+        toast.error("Kaikas를 설치해주세요!",{ position : toast.POSITION.TOP_CENTER});
         return;
         //밑에 나오는 로그인 로직이 실행되지 않게
       }
@@ -22,7 +23,7 @@ const Header = ({mypage, shop}) => {
         toast.success(`${accounts[0].slice(0,5)}...${accounts[0].slice(-5)}님 환영합니다.`)
   
       }catch {
-        toast.error("로그인 실패!")
+        toast.error("로그인 실패!",{ position : toast.POSITION.TOP_CENTER})
       }
   
     }
@@ -30,40 +31,41 @@ const Header = ({mypage, shop}) => {
     function handleLogin () {
       loginWithKaikas();
     }
-    // async function handleDone () {
-    //   const isAvailable = await isKaikasAvailable();
-    //   if (isAvailable) {
-    //     toast.error("logined");
-    //     return;
-    //   }
-    //   toast.warn("logout");
-    //   setUser("");
-    //   localStorage.removeItem('_user');
-    // }
+    async function handleDone () {
+      const isAvailable = await isKaikasAvailable();
+      if (isAvailable) {
+        toast.error("logined");
+        return;
+      }
+      toast.warn("logout");
+      setUser("");
+      localStorage.removeItem('_user');
+    }
   
-    // async function isKaikasAvailable() {
-    //   const klaytn = window?.klaytn;
-    //   if (!klaytn) {
-    //     return false;
-    //   }
+    async function isKaikasAvailable() {
+      const klaytn = window?.klaytn;
+      if (!klaytn) {
+        return false;
+      }
     
-    //   const results = await Promise.all([
-    //     klaytn._kaikas.isApproved(),
-    //     klaytn._kaikas.isEnabled(),
-    //     klaytn._kaikas.isUnlocked(),
-    //   ]);
+      const results = await Promise.all([
+        klaytn._kaikas.isApproved(),
+        klaytn._kaikas.isEnabled(),
+        klaytn._kaikas.isUnlocked(),
+      ]);
     
     
-    //   return results.every((res) => res);
-    // }
-    // 이상태에도 이게 꼭 필요한가?
-    const logout = () => {
-        setUser("");
-        localStorage.removeItem('_user')
-        toast.success("로그아웃")
-        //카이카스 로그아웃은 따로 안되나요?
+      return results.every((res) => res);
     }
 
+
+    const [userex, setuserex] = useState(false);
+    useEffect(()=> {
+        authService
+        .onAuthChange(user => {
+            user && setuserex(true);
+        });
+      });
 
 
     return(
@@ -78,8 +80,8 @@ const Header = ({mypage, shop}) => {
                 <div className={styles.buttons}>
                     {user && (<Link to="/shop"><button className={shop ? styles.active : styles.button} >shop</button></Link>)}
                     {user && (<Link to="/mypage"><button className={mypage ? styles.active : styles.button}>my page</button></Link>)}
-                    {user ?'': (<button className={styles.button} onClick={handleLogin}>login</button>)}
-                    {user && (<button className={styles.logoutButton} onClick={logout}>● {user.slice(0,5)}..{user.slice(-5)}</button>)}
+                    {user || (<button className={styles.button} onClick={handleLogin}>login</button>)}
+                    {user && (<button className={styles.logoutButton} onClick={handleDone}>● connected</button>)}
         
                 </div>
 

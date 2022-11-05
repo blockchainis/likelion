@@ -6,18 +6,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Team from '../../components/team/team';
 import HowToPlay from '../../components/howToPlay/howToPlay';
-import { useAuth } from '../../context/AuthContext';
 
 
 const Main = () => {
     //login용 기본 함수
-    const {user} = useAuth();
     const history = useNavigate();
-    useEffect(()=> {
-        if (user && localStorage.getItem('_user')){
-            history('/connected');
-        }
-    },);
 
     return (
         <section className="all">
@@ -26,8 +19,7 @@ const Main = () => {
             <img src="./images/nomobile.png" alt="no mobile" />
             </section>
             <section className={styles.contents}>
-                <h1>로그인 전 페이지</h1>
-                <p>❕지갑연결 안내(안전한지갑연결):기획의도 연결, 로그인후에는 안내없음</p>
+                <h2>❕지갑연결 안내(안전한지갑연결):기획의도 연결, 로그인후에는 안내없음</h2>
                 <HowToPlay />
                 <Team />
             </section>

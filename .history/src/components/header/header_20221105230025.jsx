@@ -11,7 +11,7 @@ const Header = ({mypage, shop}) => {
     const {user, setUser} = useAuth();
     async function loginWithKaikas() {
       if (!klaytn) {
-        toast.error("Kaikas를 설치해주세요!");
+        toast.error("Kaikas를 설치해주세요!",{ position : toast.POSITION.TOP_CENTER});
         return;
         //밑에 나오는 로그인 로직이 실행되지 않게
       }
@@ -22,7 +22,7 @@ const Header = ({mypage, shop}) => {
         toast.success(`${accounts[0].slice(0,5)}...${accounts[0].slice(-5)}님 환영합니다.`)
   
       }catch {
-        toast.error("로그인 실패!")
+        toast.error("로그인 실패!",{ position : toast.POSITION.TOP_CENTER})
       }
   
     }
@@ -60,7 +60,6 @@ const Header = ({mypage, shop}) => {
     const logout = () => {
         setUser("");
         localStorage.removeItem('_user')
-        toast.success("로그아웃")
         //카이카스 로그아웃은 따로 안되나요?
     }
 

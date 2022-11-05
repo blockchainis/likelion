@@ -18,6 +18,9 @@ const Connected = () =>{
         }
 
     },);
+    const onLogout = () => {
+        console.log('logout');
+  };
 return (
     <section className="all">
         <Header />
@@ -25,7 +28,6 @@ return (
         <img src="./images/nomobile.png" alt="no mobile" />
         </section>
         <section className={styles.contents}>
-            <h1>로그인 후 페이지</h1>
             <HowToPlay/>
             <Team />
         </section>

@@ -5,18 +5,27 @@ import Header from '../../components/header/header';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Item from '../../components/item/item';
-import { useAuth } from '../../context/AuthContext';
 
 
-const Shop = ({shopItems,setShopItems, nickname,myStatus,setMystatus, updateScoreLimit}) =>{
+const Shop = (props) =>{
+    const {authService, shopItems,setShopItems, scoreLimit,nickname,myStatus,setMystatus, updateScoreLimit} = props
     const shop = true;
-
-    const {user} = useAuth();
+    const [maxScore, minScore]= scoreLimit;
+    //login용 기본 함수
     const history = useNavigate();
     useEffect(()=> {
-        if (!user || !localStorage.getItem('_user')){
-            history('/');
-        }
+        // authService
+        // .onAuthChange(user => {
+        //     user || history('/');
+        // });
+          // 점수 조작 시도시 강제 로그아웃. 
+      if (maxScore<myStatus.myScore){
+          alert('라이어 + 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
+          onLogout()
+      } else if (Number(-minScore)>Number(myStatus.myScore)) {
+          alert('라이어 - 아이템 조작시도가 감지되었습니다.관리자에게 문의하세요.')
+          onLogout()
+      }
     },);
     const onLogout = () => {
         console.log('logout');
@@ -37,7 +46,7 @@ const Shop = ({shopItems,setShopItems, nickname,myStatus,setMystatus, updateScor
 
 return (
     <section className="all">
-        <Header shop={shop}/>
+        <Header authService={authService} onLogout={onLogout} shop={shop}/>
         <section className={styles.mobileContents}>모바일 환경에서는 접속이 되지 않습니다. <br />데스크탑 환경에서 접속해주세요.
         <img src="./images/nomobile.png" alt="no mobile" />
         </section>

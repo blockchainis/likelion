@@ -14,18 +14,20 @@ const Connected = () =>{
     const history = useNavigate();
     useEffect(()=> {
         if (!user || !localStorage.getItem('_user')){
-            history('/');
+            // history('/');
         }
 
     },);
+    const onLogout = () => {
+        console.log('logout');
+  };
 return (
     <section className="all">
-        <Header />
+        <Header authService={authService} onLogout={onLogout} />
         <section className={styles.mobileContents}>모바일 환경에서는 접속이 되지 않습니다. <br />데스크탑 환경에서 접속해주세요.
         <img src="./images/nomobile.png" alt="no mobile" />
         </section>
         <section className={styles.contents}>
-            <h1>로그인 후 페이지</h1>
             <HowToPlay/>
             <Team />
         </section>
