@@ -1,7 +1,0 @@
-@value makerPrimary, makerSecondary from '../../common/colors.css';
-@value mediaQuery from '../../common/size.css';
-
-.h1 {
-    font-size: 100px;
-}
-

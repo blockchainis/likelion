@@ -2,11 +2,11 @@
 @value mediaQuery from '../../common/size.css';
 
 .footer {
-    width: 100%;
-    max-width: mediaQuery;
-    text-align: center;
+  width: 100%;
+  max-width: mediaQuery;
+  text-align: center;
 }
 
 .title {
-    color: makerSecondary;
+  color: makerSecondary;
 }
